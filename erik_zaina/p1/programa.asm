@@ -1,0 +1,44 @@
+.DATA
+ONE DB 1
+CONST_0 DB 0
+CONST_1 DB 1
+NEG_1 DB 255
+RES DB ?
+a DB ?
+CONST_10 DB 10
+CONST_2 DB 2
+CONST_5 DB 5
+b DB ?
+c DB ?
+CONST_4 DB 4
+
+.CODE
+.ORG 0
+; Atribuição: a = ...
+LDA CONST_5
+STA a
+; Atribuição: b = ...
+LDA a
+ADD CONST_2
+STA b
+; Atribuição: c = ...
+LDA a
+ADD b
+STA TEMP_0
+LDA CONST_0
+STA TEMP_1
+LDA CONST_2
+ADD TEMP_1
+STA TEMP_1
+LDA CONST_2
+ADD TEMP_1
+STA TEMP_1
+LDA TEMP_1
+STA TEMP_2
+LDA TEMP_0
+SUB TEMP_2
+STA c
+; Expressão de resultado
+LDA c
+STA RES
+HLT

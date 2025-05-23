@@ -1,0 +1,8 @@
+PROGRAMA "Teste":
+INICIO
+a = 10 / 2
+b = a + 2 
+c = a + b - (2 * 2)
+RES = c
+FIM
+
