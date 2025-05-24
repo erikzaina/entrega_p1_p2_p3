@@ -1,0 +1,64 @@
+<programa> ::= "PROGRAMA" <ws>? <identificador_com_aspas> ":" <nl> "INICIO" <nl> <bloco> "FIM" <ws>? <nl>?
+
+<identificador_com_aspas> ::= "\"" <identificador> "\""
+
+<bloco> ::= (<linha_comando>)* (<atribuicao_final_line>)?
+
+<linha_comando> ::= <declaracao_variavel_line>
+                 | <atribuicao_line>
+                 | <condicional>
+                 | <loop>
+                 | <chamada_funcao_line>
+                 | <declaracao_funcao>
+
+<declaracao_variavel_line> ::= <tipo> <ws> <identificador> (<ws>? "=" <ws>? <expressao>)? <ws>? <nl>
+
+<atribuicao_line> ::= <identificador> <ws>? "=" <ws>? <expressao> <ws>? <nl>
+
+<atribuicao_final_line> ::= "RES" <ws>? "=" <ws>? <expressao> <ws>? <nl>
+
+<condicional> ::= "SE" <ws>? "(" <expressao_logica> ")" <ws>? "{" <nl> <bloco> "}" <nl>? (<ws>? "SENAO" <ws>? "{" <nl> <bloco> "}" <nl>?)?
+
+<expressao_logica> ::= <expressao> (<ws>? <operador_relacional> <ws>? <expressao>)?
+
+<operador_relacional> ::= "==" | "!=" | "<" | ">" | "<=" | ">="
+
+<loop> ::= "ENQUANTO" <ws>? "(" <expressao> ")" <ws>? "{" <nl> <bloco> "}" <nl>?
+
+<declaracao_funcao> ::= <tipo_retorno> <ws> "FUNCAO" <ws> <identificador> <ws>? "(" <parametros>? ")" <ws>? "{" <nl> <bloco> "}" <nl>?
+
+<parametros> ::= <parametro> ("," <ws>? <parametro>)*
+<parametro> ::= <tipo> <ws> <identificador>
+
+<chamada_funcao_line> ::= <identificador> <ws>? "(" <argumentos>? ")" <ws>? <nl>
+<argumentos> ::= <expressao> ("," <ws>? <expressao>)*
+
+<tipo_retorno> ::= "void" | <tipo>
+<tipo> ::= "int" | "float" | "char"
+
+<expressao> ::= <termo> ( <ws>? ("+" | "-") <ws>? <termo> )*
+<termo> ::= <fator> ( <ws>? ("*" | "/") <ws>? <fator> )*
+<fator> ::= "(" <ws>? <expressao> <ws>? ")" 
+         | <numero> 
+         | <identificador>
+         | <chamada_funcao_inline>
+
+<chamada_funcao_inline> ::= <identificador> <ws>? "(" <argumentos>? ")"
+
+<numero> ::= <positivo> | <negativo>
+<positivo> ::= <inteiro> <fracao>? <cientifico>?
+<negativo> ::= "-" <positivo>
+<fracao> ::= "." <digito>+
+<cientifico> ::= "e" "-"? <digito>+
+
+<inteiro> ::= "0" | <digito_nao_zero> <digito>*
+
+<identificador> ::= <letra> <letra_ou_digito>*
+<letra_ou_digito> ::= <letra> | <digito> | "_"
+<letra> ::= ([a-z] | [A-Z])+
+
+<digito> ::= [0-9]
+<digito_nao_zero> ::= [1-9]
+
+<ws> ::= (" " | "\t")*
+<nl> ::= "\n"

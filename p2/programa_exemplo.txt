@@ -1,0 +1,8 @@
+PROGRAMA "exemplo":
+INICIO
+int variavel = 20
+SE (variavel > 20) {
+float outra_variavel = variavel * 2.5
+}
+RES = outra_variavel
+FIM
